@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FlowCheckout — Premium Fintech Landing</title>
+  <meta name="description" content="FlowCheckout — payments infrastructure for global businesses. Light theme demo." />
+  <style>
+    /* -------------------------
+       THEME C — White + Emerald
+       CSS Reset (tiny) + variables
+       ------------------------- */
+    :root{
+      --primary:#009B72;
+      --primary-2:#33C29D;
+      --primary-pale:#D6F5E9;
+      --bg:#ffffff;
+      --bg-subtle:#F6FEFA;
+      --surface:#ffffff;
+      --border:#E2E8F0;
+      --text:#0F172A;
+      --muted:#334155;
+      --muted-2:#64748B;
+      --accent-soft:#EEFDF7;
+      --shadow-soft: 0 6px 24px rgba(12,18,22,0.06);
+      --shadow-card: 0 10px 40px rgba(12,18,22,0.08);
+      --glass: rgba(255,255,255,0.6);
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body,#root{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* -------------------------
+       NAV
+       ------------------------- */
+    header.site-header{
+      position:sticky;top:0;z-index:40;
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand .logo{width:36px;height:36px;border-radius:8px;background:var(--primary)}
+    .brand .title{font-weight:700;font-size:18px;color:var(--text)}
+    nav.main-nav{display:none;gap:22px;color:var(--muted)}
+    nav.main-nav a{font-size:14px;opacity:.95}
+    .cta-row{display:flex;gap:10px;align-items:center}
+
+    /* -------------------------
+       HERO LAYOUT
+       ------------------------- */
+    section.hero{
+      background:var(--bg-subtle);
+      border-bottom:1px solid var(--border);
+      padding:72px 0;
+      position:relative;
+      overflow:visible;
+    }
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+    @media(min-width:900px){ .hero-grid{grid-template-columns:1fr 520px} nav.main-nav{display:flex} }
+
+    .hero-left{max-width:650px}
+    .badge{
+      display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;
+      background:var(--accent-soft);color:var(--primary);font-size:12px;font-weight:600;border:1px solid var(--primary-pale);
+      letter-spacing:.4px;
+    }
+    h1{font-size:36px;line-height:1.02;margin:18px 0 12px;font-weight:700}
+    @media(min-width:900px){ h1{font-size:56px} }
+    p.lead{color:var(--muted);max-width:46ch}
+
+    .hero-ctas{display:flex;gap:12px;margin-top:18px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;border:0;
+      box-shadow:var(--shadow-soft);
+    }
+    .btn.primary{background:linear-gradient(90deg,var(--primary),var(--primary-2));color:#fff}
+    .btn.secondary{background:transparent;color:var(--primary);border:1px solid rgba(0,155,114,0.12)}
+
+    /* Magnetic wrapper provides overflow hidden for nice motion */
+    .magnetic{display:inline-block;transform:translateZ(0)}
+    .magnetic:active{transform:scale(.99)}
+
+    /* -------------------------
+       KPI PANEL
+       ------------------------- */
+    .panel{
+      border-radius:18px;padding:22px;background:var(--surface);border:1px solid var(--border);
+      box-shadow:var(--shadow-card);transform-origin:center center;
+    }
+    .panel .kpi-title{font-size:11px;font-weight:700;color:var(--primary);letter-spacing:1.4px}
+    .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    .kpi-card{
+      border-radius:12px;padding:14px;background:linear-gradient(180deg,var(--accent-soft),#fff);
+      box-shadow: 0 8px 24px rgba(12,18,22,0.04);
+    }
+    .kpi-card p{margin:0}
+    .kpi-large{font-size:28px;font-weight:700;color:var(--primary);margin-top:8px}
+    .kpi-sub{font-size:12px;color:var(--muted-2);margin-top:8px}
+
+    .chart-preview{margin-top:16px;height:110px;border-radius:10px;background:linear-gradient(90deg,#F0FFF6,#F6FEFA);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    @media(min-width:900px){ .panel { padding:28px } .chart-preview { height:128px } }
+
+    /* -------------------------
+       CTA SECTION
+       ------------------------- */
+    section.cta{
+      padding:72px 0;text-align:center;background:linear-gradient(90deg,#fff,#F8FFFB);
+    }
+    section.cta h2{font-size:28px;margin:0 0 12px}
+    section.cta p{color:var(--muted);max-width:60ch;margin:0 auto 20px}
+
+    /* -------------------------
+       FOOTER
+       ------------------------- */
+    footer.site-footer{padding:26px 0;border-top:1px solid var(--border);text-align:center;color:var(--muted-2);font-size:13px}
+
+    /* -------------------------
+       BACKGROUND LINES (absolute layer)
+       ------------------------- */
+    .bg-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .bg-lines span.vert{
+      position:absolute;top:-120%;width:1px;height:340%;opacity:.12;background:var(--primary);
+      animation:flowLines linear infinite;
+    }
+    .bg-lines span.beam{
+      position:absolute;top:-140%;width:2px;height:380%;opacity:.07;transform:rotate(25deg);
+      background:var(--primary-2);animation:slowBeam linear infinite;
+    }
+
+    @keyframes flowLines{
+      0%{transform:translateY(-100%);opacity:0}
+      20%{opacity:.25}
+      100%{transform:translateY(100%);opacity:0}
+    }
+    @keyframes slowBeam{
+      0%{transform:translateY(-120%) rotate(25deg)}
+      100%{transform:translateY(120%) rotate(25deg)}
+    }
+
+    /* -------------------------
+       Cursor glow
+       ------------------------- */
+    .cursor-glow{
+      position:fixed;left:0;top:0;pointer-events:none;width:360px;height:360px;border-radius:50%;
+      filter:blur(36px);opacity:.9;mix-blend-mode:screen;z-index:30;
+      transform:translate3d(-9999px,-9999px,0);
+    }
+
+    /* -------------------------
+       Animations for sliding cards / reveal
+       ------------------------- */
+    .reveal{opacity:0;transform:translateY(28px);transition:all .7s cubic-bezier(.2,.9,.25,1)}
+    .reveal.in{opacity:1;transform:translateY(0)}
+    .slide-left{transform:translateX(-36px);opacity:0}
+    .slide-right{transform:translateX(36px);opacity:0}
+    .slide-in{transform:none;opacity:1;transition:all .7s cubic-bezier(.2,.9,.25,1)}
+
+    /* -------------------------
+       Responsive tweaks
+       ------------------------- */
+    @media(max-width:640px){
+      .hero{padding:36px 0}
+      h1{font-size:28px}
+      .hero-grid{gap:20px}
+      .panel{border-radius:14px;padding:16px}
+    }
+
+    /* small decorative */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <div id="root">
+    <!-- Animated background lines -->
+    <div class="bg-lines" aria-hidden="true"></div>
+
+    <!-- Cursor glow -->
+    <div id="cursorGlow" class="cursor-glow" style="background: radial-gradient(circle at 30% 30%, rgba(51,194,157,0.28), rgba(0,155,114,0.18) 25%, rgba(0,155,114,0.06) 55%, transparent 70% )"></div>
+
+    <!-- NAV -->
+    <header class="site-header" role="banner">
+      <div class="container nav-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="title">FlowCheckout</div>
+        </div>
+
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+          <a href="#">Products</a>
+          <a href="#">Solutions</a>
+          <a href="#">Resources</a>
+          <a href="#">Company</a>
+        </nav>
+
+        <div class="cta-row">
+          <a class="btn secondary" href="#" aria-label="Sign in" style="display:none">Sign in</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <div class="container hero-grid" aria-hidden="false">
+          <!-- left: text -->
+          <div class="hero-left" id="heroText">
+            <div class="badge">High-performance payments platform</div>
+            <h1>
+              Where <span style="color:var(--primary)">global businesses</span><br />
+              get paid without friction.
+            </h1>
+            <p class="lead">FlowCheckout helps companies accept, route and optimize payments worldwide with a next-gen financial infrastructure.</p>
+
+            <div class="hero-ctas" style="margin-top:18px;">
+              <div class="magnetic">
+                <button class="btn primary" id="talkBtn">Meet with payments expert</button>
+              </div>
+              <div class="magnetic">
+                <button class="btn secondary" id="docsBtn">View API Docs →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- right: KPI panel -->
+          <div class="panel" id="kpiPanel" role="region" aria-label="Performance panel">
+            <div class="kpi-title">REAL-TIME PERFORMANCE</div>
+            <div class="kpi-grid" style="margin-top:12px">
+              <div class="kpi-card reveal slide-left" id="kpiLeft">
+                <p style="font-size:12px;color:var(--muted-2);margin:0;">Authorization rate</p>
+                <div class="kpi-large">98.3%</div>
+                <div class="kpi-sub">+2.1 pts vs last month</div>
+              </div>
+              <div class="kpi-card reveal slide-right" id="kpiRight">
+                <p style="font-size:12px;color:var(--muted-2);margin:0;">Monthly volume</p>
+                <div class="kpi-large" style="color:var(--text)"> $1.8B </div>
+                <div class="kpi-sub">Multi-region acquiring</div>
+              </div>
+            </div>
+
+            <div class="chart-preview" id="chartPreview">Interactive dashboard preview</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta">
+        <div class="container">
+          <h2>Unlock elite payments performance</h2>
+          <p>Tailored engineering for frictionless global payments.</p>
+          <div style="margin-top:18px;">
+            <div class="magnetic" style="display:inline-block">
+              <button class="btn primary" id="demoBtn">Schedule Premium Demo</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="site-footer">
+        <div class="container">
+          © 2025 FlowCheckout. Inspiration-only demo layout.
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    /* ===========================================================================
+       Vanilla JS for:
+         - animated background lines
+         - parallax hero (text + panel)
+         - cursor glow
+         - magnetic buttons
+         - reveal animations (sliding KPI cards)
+       =========================================================================== */
+
+    (function(){
+      // ---------- Background lines ----------
+      const bgLines = document.querySelector('.bg-lines');
+      if(bgLines){
+        // Create vertical flowing lines
+        for(let i=0;i<12;i++){
+          const s = document.createElement('span');
+          s.className = 'vert';
+          s.style.left = (i*8) + '%';
+          s.style.animationDuration = (6 + i*0.4) + 's';
+          bgLines.appendChild(s);
+        }
+        // diagonal beams
+        for(let i=0;i<4;i++){
+          const b = document.createElement('span');
+          b.className = 'beam';
+          b.style.left = (20 + i*20) + '%';
+          b.style.animationDuration = (12 + i*3) + 's';
+          bgLines.appendChild(b);
+        }
+      }
+
+      // ---------- Cursor Glow ----------
+      const glow = document.getElementById('cursorGlow');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if(glow && !prefersReducedMotion){
+        window.addEventListener('mousemove', e => {
+          // position with slight offset so glow feels organic
+          const x = e.clientX - glow.offsetWidth/2;
+          const y = e.clientY - glow.offsetHeight/2;
+          // use rAF for smoother animation
+          window.requestAnimationFrame(() => {
+            glow.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          });
+        });
+      }
+
+      // ---------- Magnetic buttons ----------
+      function makeMagnetic(btn){
+        // relative mouse movement transforms the parent container
+        const wrap = btn.closest('.magnetic');
+        if(!wrap) return;
+        wrap.style.willChange = 'transform';
+        wrap.addEventListener('mousemove', (ev) => {
+          const rect = wrap.getBoundingClientRect();
+          const cx = rect.left + rect.width/2;
+          const cy = rect.top + rect.height/2;
+          const dx = ev.clientX - cx;
+          const dy = ev.clientY - cy;
+          const rx = (dx / rect.width) * 18; // horizontal tilt
+          const ry = (dy / rect.height) * 12; // vertical tilt
+          wrap.style.transform = `translate(${rx}px, ${ry}px)`;
+        });
+        wrap.addEventListener('mouseleave', () => {
+          wrap.style.transform = 'translate(0px, 0px)';
+        });
+      }
+      document.querySelectorAll('.magnetic .btn').forEach(makeMagnetic);
+
+      // ---------- Reveal / sliding KPI cards ----------
+      const revealEls = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(ent => {
+          if(ent.isIntersecting){
+            ent.target.classList.add('in');
+            // add slide-in class per side
+            if(ent.target.classList.contains('slide-left')){
+              ent.target.classList.add('slide-in'); ent.target.style.transform = 'translateX(0)';
+            } else if(ent.target.classList.contains('slide-right')){
+              ent.target.classList.add('slide-in'); ent.target.style.transform = 'translateX(0)';
+            }
+            io.unobserve(ent.target);
+          }
+        });
+      }, { threshold: 0.22 });
+
+      revealEls.forEach(el => io.observe(el));
+
+      // ---------- Cinematic parallax (text vs panel) ----------
+      const heroText = document.getElementById('heroText');
+      const kpiPanel = document.getElementById('kpiPanel');
+
+      // Slight transforms on scroll — use requestAnimationFrame throttle
+      let lastScroll = window.scrollY;
+      function onScrollLoop(){
+        const y = window.scrollY;
+        // map 0..400 to transforms
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        const t = clamp(y, 0, 400)/400;
+        // heroText: y:-30, x:-20, rotateY:-6deg
+        const textY = -30 * t;
+        const textX = -20 * t;
+        const textR = -6 * t;
+        // kpiPanel: y:-90, x:40, rotateY:10deg
+        const panelY = -90 * t;
+        const panelX = 40 * t;
+        const panelR = 10 * t;
+        if(heroText){
+          heroText.style.transform = `translate3d(${textX}px, ${textY}px, 0) rotateY(${textR}deg)`;
+          heroText.style.transformOrigin = 'center center';
+        }
+        if(kpiPanel){
+          kpiPanel.style.transform = `translate3d(${panelX}px, ${panelY}px, 0) rotateY(${panelR}deg)`;
+          kpiPanel.style.transformOrigin = 'center center';
+        }
+        lastScroll = y;
+        requestAnimationFrame(onScrollLoop);
+      }
+      requestAnimationFrame(onScrollLoop);
+
+      // ---------- Fine: animated KPI count up (optional) ----------
+      function animateCount(el, from, to, duration){
+        const start = performance.now();
+        function step(now){
+          const t = Math.min(1, (now - start)/duration);
+          const val = Math.floor(from + (to-from)*t);
+          el.textContent = val + (el.dataset.suffix ? el.dataset.suffix : '');
+          if(t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      // If you want to run count-up once revealed
+      const leftLarge = document.querySelector('#kpiLeft .kpi-large');
+      const rightLarge = document.querySelector('#kpiRight .kpi-large');
+      if(leftLarge){
+        // delay start when panel enters viewport
+        const obs = new IntersectionObserver((ents) => {
+          ents.forEach(en => {
+            if(en.isIntersecting){
+              animateCount(leftLarge, 95, 98, 900);
+              animateCount(rightLarge, 1500, 1800, 900);
+              obs.disconnect();
+            }
+          });
+        }, {threshold:0.4});
+        obs.observe(document.querySelector('#kpiPanel'));
+      }
+
+      // ---------- Keyboard accessibility: allow Enter to trigger primary CTAs ----------
+      document.getElementById('talkBtn')?.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter') alert('Schedule meeting (placeholder)');
+      });
+      document.getElementById('demoBtn')?.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter') alert('Schedule demo (placeholder)');
+      });
+
+      // ---------- Reduce motion preference handling ----------
+      if(prefersReducedMotion){
+        document.querySelectorAll('.bg-lines span, .cursor-glow').forEach(el => el.style.animation = 'none');
+        document.querySelectorAll('.reveal').forEach(el => { el.classList.add('in'); });
+        // remove parallax transforms
+        if(heroText) heroText.style.transform = 'none';
+        if(kpiPanel) kpiPanel.style.transform = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>
