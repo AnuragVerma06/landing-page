@@ -6,7 +6,7 @@ A premium, fully animated fintech landing page inspired by modern payment platfo
 
 ## 🚀 Live Demo
 
-Once deployed, your landing page will be accessible at:
+https://clinquant-hummingbird-b2b3e3.netlify.app/
 
 ---
 
@@ -28,25 +28,7 @@ This landing page includes:
 
 ## 🛠️ Setup Instructions (Ultra Simple)
 
-### **1. Add `index.html` to your GitHub repo**
-Your repo structure should look like:
-your-repo/
-├── index.html
-└── README.md
-
----
-
-
-### **2. Enable GitHub Pages**
-Go to:
-
-**Settings → Pages → Branch: `main` → Folder: `/ (root)`**
-
-Click **Save**.
-
-### **3. Done**
-Wait 20–60 seconds.  
-Your site is now live at:
+No setup needed. Just access through the link.
 
 ---
 
